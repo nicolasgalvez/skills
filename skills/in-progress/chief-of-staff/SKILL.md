@@ -37,7 +37,9 @@ They also need relevant **data sources** to succeed:
 - Access to test environment databases
 - Access to the browser (when necessary) for clicking around and taking screenshots
 
-Finally, create environments (and codebases) that obey the "no workarounds" rule:
+Finally, create environments (and codebases) that obey the **"no workarounds"** rule:
 
 - No one-off workarounds, or hacks that bypass established processes
 - Any deviations from conventions must be fixed proactively, before feature work is done
+
+Be relentless in improving the environment. Use every user message as an excuse to search for these improvements.
