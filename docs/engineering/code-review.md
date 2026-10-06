@@ -58,7 +58,7 @@ One answer is to remove Claude Code's built-in skills entirely. That saves a lot
 
 **Its sub-agents keep invoking `/code-review` again and spawn more agents.**
 
-Several people reproduced this, in more than one harness. The Standards and Spec prompts did not forbid delegation, so a sub-agent could find the skill again and fan out again. One report reached more than 50 agents. Both briefs now tell the sub-agent it is the reviewer for its axis, and that it must do the review itself without invoking `code-review` or spawning further agents. If it still happens on the latest version, check your harness: some let a sub-agent delegate whatever its prompt says, and the guard is then best enforced there.
+Fixed: both sub-agent briefs now tell the sub-agent to do the review itself, without invoking `code-review` or spawning agents. If it persists, enforce the guard in your harness.
 
 **Should I run it in the same [session](https://www.aihero.dev/ai-coding-dictionary/session) that wrote the code?**
 
