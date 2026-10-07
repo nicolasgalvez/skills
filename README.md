@@ -24,7 +24,7 @@ If you want to keep up with changes to these skills, and any new ones I create, 
 
 ## Installation (30-second setup)
 
-Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle that updates when Anthropic's marketplace picks up my releases, so you subscribe rather than fork. **[skills.sh](https://skills.sh/mattpocock/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
+Two ways in, two philosophies. **The plugin** (Claude Code, Copilot, Codex) installs the whole set as a managed, read-only bundle, so you subscribe rather than fork. **[skills.sh](https://skills.sh/mattpocock/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
 
 ### 1. Get the skills
 
@@ -54,15 +54,51 @@ claude plugin install mattpocock-skills@mattpocock
 </details>
 
 <details>
-<summary><strong>Codex, and other agents</strong></summary>
+<summary><strong>GitHub Copilot</strong> (CLI and VS Code)</summary>
 
 ```bash
-npx skills@latest add mattpocock/skills
+copilot plugin marketplace add mattpocock/skills
+copilot plugin install mattpocock-skills@mattpocock
 ```
 
-Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
+In VS Code, run **Chat: Install Plugin From Source** and enter `https://github.com/mattpocock/skills`.
 
-A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
+</details>
+
+<details>
+<summary><strong>Codex</strong></summary>
+
+```bash
+codex plugin marketplace add mattpocock/skills
+codex plugin add mattpocock-skills@mattpocock
+```
+
+</details>
+
+<details>
+<summary><strong>Gemini CLI</strong></summary>
+
+```bash
+gemini skills install https://github.com/mattpocock/skills.git --path skills/engineering
+gemini skills install https://github.com/mattpocock/skills.git --path skills/productivity
+```
+
+</details>
+
+<details>
+<summary><strong>Cursor, OpenCode, Devin, Windsurf, Amp, pi, and other agents</strong></summary>
+
+| Agent         | Command                                               |
+| ------------- | ----------------------------------------------------- |
+| Cursor        | `npx skills@latest add mattpocock/skills -a cursor`   |
+| OpenCode      | `npx skills@latest add mattpocock/skills -a opencode` |
+| Devin         | `npx skills@latest add mattpocock/skills -a devin`    |
+| Windsurf      | `npx skills@latest add mattpocock/skills -a windsurf` |
+| Amp           | `npx skills@latest add mattpocock/skills -a amp`      |
+| pi            | `npx skills@latest add mattpocock/skills -a pi`       |
+| Anything else | `npx skills@latest add mattpocock/skills`             |
+
+Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
 
 </details>
 

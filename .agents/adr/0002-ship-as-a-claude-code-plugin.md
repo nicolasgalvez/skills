@@ -39,3 +39,9 @@ Verified 2026-08-05, on Claude Code 2.1.222, against the live listing:
 - `claude plugin details mattpocock-skills` then reports version 1.2.0 and loads the promoted skills.
 - The listing's `source` is `{"source": "url", "url": "https://github.com/mattpocock/skills.git", "sha": …}`: the **sha is pinned**, so a release reaches installed users when that pin moves, not the moment we tag. At the time of writing the pin sits two commits behind `main`, which is why it lists 22 skills rather than the 24 in `plugin.json`.
 - The in-session `/plugin install mattpocock-skills` was **not** exercised: `/plugin` is unavailable in headless (`claude -p`) sessions. It runs the same resolver as the CLI, and the documented example form is `/plugin install <name>@claude-plugins-official`.
+
+## Update, 2026-10-07
+
+The Codex constraint above no longer holds. Codex `main` accepts `skills` as a string or a string array, and falls back to `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` when there is no `.codex-plugin/` ([manifest.rs](https://github.com/openai/codex/blob/main/codex-rs/core-plugins/src/manifest.rs), [protocol.rs](https://github.com/openai/codex/blob/main/codex-rs/exec-server-protocol/src/protocol.rs)). Symlinks are still dropped on install.
+
+So the Claude plugin installs on Codex as-is, with no `.codex-plugin/` and no restructure. Verified 2026-10-07 on Codex 0.161.0 in a throwaway `HOME`: `codex plugin marketplace add mattpocock/skills` then `codex plugin add mattpocock-skills@mattpocock` succeeds, and `codex debug prompt-input` lists the promoted model-invoked skills and nothing from `misc/` or `in-progress/`. Copilot CLI reads the same manifests ("Installed 27 skills"). Both routes are in [.agents/install-block.md](../install-block.md).

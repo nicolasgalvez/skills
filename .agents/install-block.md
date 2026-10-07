@@ -30,21 +30,64 @@ claude plugin install mattpocock-skills@mattpocock
 
 </canonical-block>
 
-## Codex, and other agents: skills.sh
+## Copilot and Codex: the same plugin, via this repo's marketplace
 
-The plugin is Claude Code only. Everywhere else, [skills.sh](https://skills.sh/mattpocock/skills) copies editable skill files into the project. Use the whole-set form on `README.md`:
+Copilot and Codex both read `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json`, so the Claude plugin installs on them as-is, curated to the promoted set. Neither has an official listing, so the repo's own marketplace is their primary route. Verified 2026-10-07: Copilot CLI reports "Installed 27 skills"; Codex 0.161.0 loads the promoted skills and none from `misc/` or `in-progress/`. VS Code's command is doc-sourced ([agent-plugins](https://code.visualstudio.com/docs/copilot/customization/agent-plugins)). Skip `copilot plugin install mattpocock/skills`: Copilot warns that direct repo installs are deprecated.
 
-<canonical-block name="skills-sh-whole-set">
+<canonical-block name="copilot">
 
 ```bash
-npx skills@latest add mattpocock/skills
+copilot plugin marketplace add mattpocock/skills
+copilot plugin install mattpocock-skills@mattpocock
 ```
 
-Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take: make sure `setup-matt-pocock-skills` is one of them.**
+In VS Code, run **Chat: Install Plugin From Source** and enter `https://github.com/mattpocock/skills`.
 
 </canonical-block>
 
-…and the single-skill form wherever one skill is named on its own. Note that **`docs/` pages are not a consumer of this block**: ai-hero renders the install widget above the body, so a page that writes the commands out duplicates it. See [writing-docs.md](./writing-docs.md).
+<canonical-block name="codex">
+
+```bash
+codex plugin marketplace add mattpocock/skills
+codex plugin add mattpocock-skills@mattpocock
+```
+
+</canonical-block>
+
+## Gemini CLI: one install per promoted bucket
+
+Gemini does not read `.claude-plugin`. `--path` takes one bucket folder, so two commands install exactly the promoted set (verified 2026-10-07: 27 skills, nothing from the other buckets). These are copies, not a managed plugin.
+
+<canonical-block name="gemini">
+
+```bash
+gemini skills install https://github.com/mattpocock/skills.git --path skills/engineering
+gemini skills install https://github.com/mattpocock/skills.git --path skills/productivity
+```
+
+</canonical-block>
+
+## Every other agent: skills.sh
+
+Everywhere else, [skills.sh](https://skills.sh/mattpocock/skills) copies editable skill files into the project. `-a` preselects the agent; every flag below was run on 2026-10-07. Prefer it over an agent's own repo-level installer (`amp skill add`, `pi install git:…`): those scan `skills/` recursively and pull in `misc/` and `in-progress/`.
+
+<canonical-block name="other-agents">
+
+| Agent         | Command                                               |
+| ------------- | ----------------------------------------------------- |
+| Cursor        | `npx skills@latest add mattpocock/skills -a cursor`   |
+| OpenCode      | `npx skills@latest add mattpocock/skills -a opencode` |
+| Devin         | `npx skills@latest add mattpocock/skills -a devin`    |
+| Windsurf      | `npx skills@latest add mattpocock/skills -a windsurf` |
+| Amp           | `npx skills@latest add mattpocock/skills -a amp`      |
+| pi            | `npx skills@latest add mattpocock/skills -a pi`       |
+| Anything else | `npx skills@latest add mattpocock/skills`             |
+
+Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
+
+</canonical-block>
+
+Use the single-skill form wherever one skill is named on its own. Note that **`docs/` pages are not a consumer of this block**: ai-hero renders the install widget above the body, so a page that writes the commands out duplicates it. See [writing-docs.md](./writing-docs.md).
 
 <canonical-block name="skills-sh-one-skill">
 
@@ -58,12 +101,12 @@ npx skills@latest update <name>
 
 </canonical-block>
 
-`skills@latest` is the pinned spelling in all three. The pages under `docs/` used to carry their own copy of these commands; those blocks are now deleted rather than corrected, because the site renders the install commands itself.
+`skills@latest` is the pinned spelling everywhere. The pages under `docs/` used to carry their own copy of these commands; those blocks are now deleted rather than corrected, because the site renders the install commands itself.
 
 ## The two routes are exclusive
 
 The plugin is a managed, read-only bundle you subscribe to. skills.sh writes files you own and edit. Installing both leaves the user with every skill twice: always say "pick one".
 
-## Not the install story
+## The repo's own marketplace
 
-`.claude-plugin/marketplace.json` makes the repo its own single-plugin marketplace (`/plugin marketplace add mattpocock/skills`, then `/plugin install mattpocock-skills@mattpocock`). The official listing supersedes it. It is kept as a fallback for installing the repo directly (an unreleased commit, or a fork). Users see it in exactly one place: the "Stuck on an old version?" escape hatch in the `claude-code` block, for when the official pin lags. It is never offered as the primary route.
+`.claude-plugin/marketplace.json` makes the repo its own single-plugin marketplace (`/plugin marketplace add mattpocock/skills`, then `/plugin install mattpocock-skills@mattpocock`). For Claude Code, the official listing supersedes it: users see it in exactly one place, the "Stuck on an old version?" escape hatch in the `claude-code` block, for when the official pin lags. For Copilot and Codex it is the primary route (the `copilot` and `codex` blocks), because neither has an official listing.
