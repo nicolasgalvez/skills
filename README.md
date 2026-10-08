@@ -32,11 +32,10 @@ A **plugin** updates itself; **[skills.sh](https://skills.sh/mattpocock/skills)*
 <summary><strong>Claude Code</strong></summary>
 
 ```bash
-claude plugin marketplace add mattpocock/skills
-claude plugin install mattpocock-skills@mattpocock
+claude plugin install mattpocock-skills@claude-plugins-official
 ```
 
-Then, once: `/plugin` → **Marketplaces** → `mattpocock` → **Enable auto-update**. On `@claude-plugins-official` (it lags)? Run `claude plugin uninstall mattpocock-skills@claude-plugins-official` first.
+Updates itself by default.
 
 </details>
 

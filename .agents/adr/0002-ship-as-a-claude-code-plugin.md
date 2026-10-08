@@ -48,6 +48,6 @@ Verified on Codex 0.161.0: the `@mattpocock` marketplace install loads the promo
 
 ## Update, 2026-10-08: managed installs first
 
-`@mattpocock` is now the lead route on Claude Code, Codex, Copilot and VS Code, reversing the 2026-08-05 update: the official listing's hand-moved `sha` sat 70 commits behind `main`. The cost is a one-time opt-in on Claude Code and Copilot.
+`@mattpocock` is now the lead route on Codex, Copilot and VS Code. Claude Code stays on `claude-plugins-official` (the 2026-08-05 update): it auto-updates by default and needs no `marketplace add`. The cost is a one-time opt-in on Copilot.
 
 The version invariant above now gates every managed route, and `npm run version` already keeps it (via `scripts/sync-plugin-version.mjs`). `marketplace.json` has no `version` to drift.

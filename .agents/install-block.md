@@ -6,33 +6,30 @@ One install story, one wording. `README.md`, `.changeset/*`, and every page unde
 
 Lead with installs that **update themselves**; fall back to skills.sh, labelled "manual updates", only where an agent has none. Call a route managed only if it updates with no user command, put any one-time opt-in beside its install command, and never promise "instant".
 
-Every managed route installs the plugin from this repo's own marketplace (`.claude-plugin/marketplace.json` + `plugin.json`). It reinstalls only when `plugin.json`'s `version` changes, which `npm run version` (Release workflow) syncs from `package.json`: users get a release when the "chore: version skills" PR merges.
+Claude Code installs from its official marketplace (`claude-plugins-official`); every other managed route installs from this repo's own (`.claude-plugin/marketplace.json` + `plugin.json`). Those reinstall only when `plugin.json`'s `version` changes, which `npm run version` (Release workflow) syncs from `package.json`: users get a release when the "chore: version skills" PR merges.
 
 | Agent         | Route                            | Updates itself?                                       |
 | ------------- | -------------------------------- | ----------------------------------------------------- |
-| Claude Code   | `@mattpocock` marketplace        | Yes, after a one-time "Enable auto-update" toggle     |
+| Claude Code   | `@claude-plugins-official`       | Yes, by default                                       |
 | Codex         | `@mattpocock` marketplace        | Yes, at startup, by default                           |
 | Copilot CLI   | `@mattpocock` marketplace        | Yes, after a one-time `autoUpdate: true`              |
 | VS Code       | Chat: Install Plugin From Source | Yes, daily, by default                                |
 | Gemini CLI    | `gemini skills install` (copies) | No: an extension needs a flat `skills/<name>/` layout |
 | Everyone else | skills.sh                        | No: `npx skills update`; re-run `add` for new skills  |
 
-Sources (2026-10-08): Claude Code [host-marketplace](https://code.claude.com/docs/en/plugins/host-marketplace#turn-on-auto-update); Codex `core-plugins/src/manager.rs`; Copilot [cli-config-dir-reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference); VS Code `pluginAutoUpdate.ts`; Gemini `skillLoader.ts`.
+Sources (2026-10-08): Codex `core-plugins/src/manager.rs`; Copilot [cli-config-dir-reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-config-dir-reference); VS Code `pluginAutoUpdate.ts`; Gemini `skillLoader.ts`.
 
 Unverified against this repo, so skills.sh until someone runs them: Auggie, Droid, Qwen, Goose.
 
 ## Claude Code
 
-The official listing (`@claude-plugins-official`) pins a `sha` Anthropic moves by hand, so it appears only in the switch-over line (ADR 0002).
-
 <canonical-block name="claude-code">
 
 ```bash
-claude plugin marketplace add mattpocock/skills
-claude plugin install mattpocock-skills@mattpocock
+claude plugin install mattpocock-skills@claude-plugins-official
 ```
 
-Then, once: `/plugin` → **Marketplaces** → `mattpocock` → **Enable auto-update**. On `@claude-plugins-official` (it lags)? Run `claude plugin uninstall mattpocock-skills@claude-plugins-official` first.
+Updates itself by default.
 
 </canonical-block>
 
