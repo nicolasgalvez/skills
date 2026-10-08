@@ -42,12 +42,12 @@ Verified 2026-08-05, on Claude Code 2.1.222, against the live listing:
 
 ## Update, 2026-10-07
 
-The Codex constraint above no longer holds: Codex `main` accepts a `skills` string array and falls back to `.claude-plugin/` when there is no `.codex-plugin/` ([manifest.rs](https://github.com/openai/codex/blob/main/codex-rs/core-plugins/src/manifest.rs)). Symlinks are still dropped.
+The Codex constraint above no longer holds. Codex `main` accepts a `skills` string array and falls back to `.claude-plugin/` when there is no `.codex-plugin/` ([manifest.rs](https://github.com/openai/codex/blob/main/codex-rs/core-plugins/src/manifest.rs)). Codex still drops symlinks.
 
-Verified on Codex 0.161.0: the `@mattpocock` marketplace install loads the promoted model-invoked skills and nothing from `misc/` or `in-progress/`. Copilot CLI reads the same manifests ("Installed 27 skills").
+On Codex 0.161.0, the `@mattpocock` marketplace install loads the promoted model-invoked skills and nothing from `misc/` or `in-progress/`. Copilot CLI reads the same manifests and reports "Installed 27 skills".
 
 ## Update, 2026-10-08: managed installs first
 
-`@mattpocock` is now the lead route on Codex, Copilot and VS Code. Claude Code stays on `claude-plugins-official` (the 2026-08-05 update): it auto-updates by default and needs no `marketplace add`. The cost is a one-time opt-in on Copilot.
+`@mattpocock` is now the lead route on Codex, Copilot and VS Code, at the cost of a one-time opt-in on Copilot. Claude Code stays on `claude-plugins-official`, as in the 2026-08-05 update, because it auto-updates by default and needs no `marketplace add`.
 
-The version invariant above now gates every managed route, and `npm run version` already keeps it (via `scripts/sync-plugin-version.mjs`). `marketplace.json` has no `version` to drift.
+The version invariant above now applies to every managed route. `npm run version` already keeps it by running `scripts/sync-plugin-version.mjs`. `marketplace.json` has no `version` field, so it can't drift.

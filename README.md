@@ -24,7 +24,7 @@ If you want to keep up with changes to these skills, and any new ones I create, 
 
 ## Installation (30-second setup)
 
-A **plugin** updates itself; **[skills.sh](https://skills.sh/mattpocock/skills)** copies editable files you update by hand. Pick one per agent: both gives you every skill twice.
+A plugin updates itself. [skills.sh](https://skills.sh/mattpocock/skills) copies editable files into your project, and you update them by hand. Pick one per agent, because installing both gives you every skill twice.
 
 ### 1. Get the skills
 
@@ -69,7 +69,7 @@ Then, once, add to `~/.copilot/settings.json`:
 }
 ```
 
-VS Code: **Chat: Install Plugin From Source** → `https://github.com/mattpocock/skills` (updates daily).
+In VS Code, run **Chat: Install Plugin From Source** and enter `https://github.com/mattpocock/skills`. It updates daily.
 
 </details>
 
@@ -81,7 +81,7 @@ gemini skills install https://github.com/mattpocock/skills.git --path skills/eng
 gemini skills install https://github.com/mattpocock/skills.git --path skills/productivity
 ```
 
-Re-run to update.
+Re-run both commands to update.
 
 </details>
 
@@ -92,7 +92,7 @@ Re-run to update.
 npx skills@latest add mattpocock/skills -a <agent>  # cursor, opencode, devin, windsurf, amp, pi; omit -a to choose
 ```
 
-Pick `setup-matt-pocock-skills` among the skills. Manual updates: `npx skills@latest update`; re-run `add` for new skills.
+When the installer asks which skills to take, include `setup-matt-pocock-skills`. To update, run `npx skills@latest update`, and re-run `add` to pick up new skills.
 
 </details>
 
