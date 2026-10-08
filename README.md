@@ -24,44 +24,23 @@ If you want to keep up with changes to these skills, and any new ones I create, 
 
 ## Installation (30-second setup)
 
-Two ways in, two philosophies. **The plugin** (Claude Code, Copilot, Codex) installs the whole set as a managed, read-only bundle, so you subscribe rather than fork. **[skills.sh](https://skills.sh/mattpocock/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
+Install the skills as a **plugin** if your agent supports one. The plugin updates itself when I ship a release, so you install it once and never have to remember to pull. Everywhere else, **[skills.sh](https://skills.sh/mattpocock/skills)** copies the skills into your project as files you own and can edit, and they only change when you update them yourself. Pick one per agent: installing both leaves you with every skill twice.
 
 ### 1. Get the skills
+
+**Updates itself:**
 
 <details>
 <summary><strong>Claude Code</strong></summary>
 
 ```bash
-claude plugins install mattpocock-skills
-```
-
-Or, from inside a session:
-
-```
-/plugin install mattpocock-skills
-```
-
-It's in Claude Code's official marketplace, so there's nothing to add first. If it says the plugin isn't found, run `claude plugins marketplace update` and retry. Updates reach you when Anthropic's marketplace moves its pin to a new release, which can lag behind this repo by days or weeks.
-
-**Stuck on an old version?** `claude plugin list` shows what you have, and [CHANGELOG.md](./CHANGELOG.md) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
-
-```bash
-claude plugin uninstall mattpocock-skills@claude-plugins-official
 claude plugin marketplace add mattpocock/skills
 claude plugin install mattpocock-skills@mattpocock
 ```
 
-</details>
+Then turn on auto-update, once: in a session, open `/plugin` → **Marketplaces** → `mattpocock` → **Enable auto-update**. Claude Code leaves it off for marketplaces outside Anthropic's; without it you update by hand with `claude plugin update mattpocock-skills@mattpocock`.
 
-<details>
-<summary><strong>GitHub Copilot</strong> (CLI and VS Code)</summary>
-
-```bash
-copilot plugin marketplace add mattpocock/skills
-copilot plugin install mattpocock-skills@mattpocock
-```
-
-In VS Code, run **Chat: Install Plugin From Source** and enter `https://github.com/mattpocock/skills`.
+**Installed it from Anthropic's official marketplace?** (`claude plugin list` shows `@claude-plugins-official`.) That copy also updates itself, but only when Anthropic moves its pin, which can lag this repo by weeks. To switch, run `claude plugin uninstall mattpocock-skills@claude-plugins-official`, then the commands above.
 
 </details>
 
@@ -73,7 +52,36 @@ codex plugin marketplace add mattpocock/skills
 codex plugin add mattpocock-skills@mattpocock
 ```
 
+Codex updates it at every startup, with nothing to turn on.
+
 </details>
+
+<details>
+<summary><strong>GitHub Copilot</strong> (CLI and VS Code)</summary>
+
+```bash
+copilot plugin marketplace add mattpocock/skills
+copilot plugin install mattpocock-skills@mattpocock
+```
+
+Then turn on auto-update, once, in `~/.copilot/settings.json`. Copilot only auto-updates its built-in marketplace unless you opt in:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "mattpocock": {
+      "source": { "source": "github", "repo": "mattpocock/skills" },
+      "autoUpdate": true
+    }
+  }
+}
+```
+
+In VS Code, run **Chat: Install Plugin From Source** and enter `https://github.com/mattpocock/skills`. VS Code checks for updates daily, as long as extension auto-update is on (the default).
+
+</details>
+
+**Updated by hand:**
 
 <details>
 <summary><strong>Gemini CLI</strong></summary>
@@ -82,6 +90,8 @@ codex plugin add mattpocock-skills@mattpocock
 gemini skills install https://github.com/mattpocock/skills.git --path skills/engineering
 gemini skills install https://github.com/mattpocock/skills.git --path skills/productivity
 ```
+
+These are copies, so they don't update themselves. Re-run both commands to pick up changes and new skills.
 
 </details>
 
@@ -100,6 +110,8 @@ gemini skills install https://github.com/mattpocock/skills.git --path skills/pro
 
 Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
 
+**These don't update themselves.** Run `npx skills@latest update` to pull my changes to the skills you have. To get skills I've added since, run the `add` command again.
+
 </details>
 
 <details>
@@ -111,7 +123,7 @@ Use the same installer, on any agent, including Claude Code:
 npx skills@latest add mattpocock/skills
 ```
 
-It writes the skills into your repo as ordinary files you own and can edit. Nothing updates behind your back; pull my latest changes when you want them with `npx skills update`.
+It writes the skills into your repo as ordinary files you own and can edit. Nothing updates behind your back: pull my latest changes when you want them with `npx skills@latest update`, and re-run `add` to get new skills.
 
 </details>
 
