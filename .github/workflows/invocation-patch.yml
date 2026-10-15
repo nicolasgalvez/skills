@@ -1,0 +1,30 @@
+name: Invocation patch
+
+# This fork exists to delete `disable-model-invocation: true` from every skill.
+# A merge from upstream silently restores it wherever upstream touched a skill's
+# frontmatter, and a re-gated skill fails by disappearing: an agent cannot see
+# it and nothing reports why. So the patch is checked rather than remembered.
+#
+# Runs on pushes to main as well as pull requests, because the way the line comes
+# back is a merge from upstream, which can land on main without a PR.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+jobs:
+  invocation-patch:
+    name: no skill is gated against agents
+    runs-on: ubuntu-latest
+    # The check reads 38 small files. A minute is already generous; this is set
+    # so a wedged runner fails fast instead of burning the 360-minute default.
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node checks/invocation-patch.mjs
