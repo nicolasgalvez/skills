@@ -1,15 +1,15 @@
 {
-  "name": "nicolasgalvez",
+  "name": "mattpocock",
   "owner": {
-    "name": "Nicolas Galvez",
-    "url": "https://github.com/nicolasgalvez"
+    "name": "Matt Pocock",
+    "url": "https://www.aihero.dev"
   },
-  "description": "Nicolas Galvez's fork of Matt Pocock's skills for real engineering, as an installable Claude Code plugin.",
+  "description": "Matt Pocock's skills for real engineering, as an installable Claude Code plugin.",
   "plugins": [
     {
-      "name": "nicolasgalvez-skills",
+      "name": "mattpocock-skills",
       "source": "./",
-      "description": "Nicolas Galvez's fork of Matt Pocock's agent skills for real engineering (grilling, spec/ticket flows, TDD, code review, domain modelling and more).",
+      "description": "Matt Pocock's agent skills for real engineering (grilling, spec/ticket flows, TDD, code review, domain modelling and more).",
       "category": "engineering",
       "keywords": [
         "engineering",

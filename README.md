@@ -6,23 +6,23 @@ This repo is a fork of [mattpocock/skills](https://github.com/mattpocock/skills)
 
 ```bash
 claude plugin marketplace add nicolasgalvez/skills
-claude plugin install nicolasgalvez-skills@nicolasgalvez
+claude plugin install mattpocock-skills@mattpocock
 ```
 
-The marketplace is read from this fork's `.claude-plugin/marketplace.json`. To pull new changes, run `claude plugin marketplace update nicolasgalvez` (or enable auto-update for the marketplace in `/plugin`).
+The marketplace is read from this fork's `.claude-plugin/marketplace.json`. To pull new changes, run `claude plugin marketplace update mattpocock` (or enable auto-update for the marketplace in `/plugin`).
 
 ### Codex
 
 ```bash
 codex plugin marketplace add nicolasgalvez/skills
-codex plugin add nicolasgalvez-skills@nicolasgalvez
+codex plugin add mattpocock-skills@mattpocock
 ```
 
 ### GitHub Copilot (CLI)
 
 ```bash
 copilot plugin marketplace add nicolasgalvez/skills
-copilot plugin install nicolasgalvez-skills@nicolasgalvez
+copilot plugin install mattpocock-skills@mattpocock
 ```
 
 ### Gemini CLI
