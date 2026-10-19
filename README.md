@@ -1,3 +1,57 @@
+# Installing this fork (nicolasgalvez/skills)
+
+This repo is a fork of [mattpocock/skills](https://github.com/mattpocock/skills). The install commands further down still point at upstream. Use these instead to get the skills from this fork. Pick one route per agent, because installing both gives you every skill twice.
+
+### Claude Code
+
+```bash
+claude plugin marketplace add nicolasgalvez/skills
+claude plugin install nicolasgalvez-skills@nicolasgalvez
+```
+
+The marketplace is read from this fork's `.claude-plugin/marketplace.json`. To pull new changes, run `claude plugin marketplace update nicolasgalvez` (or enable auto-update for the marketplace in `/plugin`).
+
+### Codex
+
+```bash
+codex plugin marketplace add nicolasgalvez/skills
+codex plugin add nicolasgalvez-skills@nicolasgalvez
+```
+
+### GitHub Copilot (CLI)
+
+```bash
+copilot plugin marketplace add nicolasgalvez/skills
+copilot plugin install nicolasgalvez-skills@nicolasgalvez
+```
+
+### Gemini CLI
+
+```bash
+gemini skills install https://github.com/nicolasgalvez/skills.git --path skills/engineering
+gemini skills install https://github.com/nicolasgalvez/skills.git --path skills/productivity
+```
+
+### Any other agent, or editable files (skills.sh)
+
+```bash
+npx skills@latest add nicolasgalvez/skills -a <agent>  # cursor, opencode, devin, windsurf, amp, pi; omit -a to choose
+```
+
+To update, run `npx skills@latest update`, and re-run `add` to pick up new skills.
+
+### Local symlinks (hacking on the skills)
+
+```bash
+git clone https://github.com/nicolasgalvez/skills.git
+cd skills
+scripts/link-skills.sh
+```
+
+This symlinks every skill outside `deprecated/` and `misc/` into `~/.claude/skills` and `~/.agents/skills`, so a `git pull` keeps them current. Re-run the script after adding, removing, or renaming a skill.
+
+---
+
 <p>
   <a href="https://www.aihero.dev/s/skills-newsletter">
     <picture>
