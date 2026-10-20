@@ -1,5 +1,43 @@
 # mattpocock-skills
 
+## 1.3.2
+
+### Patch Changes
+
+- [`03b82a8`](https://github.com/mattpocock/skills/commit/03b82a8acfb97697265a4fd8798bfbf67e791568) Thanks [@mattpocock](https://github.com/mattpocock)! - `ask-matt` now reads a skill's `SKILL.md` before stating what it does or recommending a step be skipped, instead of trusting its own one-line summaries ([#614](https://github.com/mattpocock/skills/issues/614)).
+
+- [`a0a5a92`](https://github.com/mattpocock/skills/commit/a0a5a924d4af2707bdf54da71571b10742e103ea) Thanks [@mattpocock](https://github.com/mattpocock)! - `chief-of-staff` now keeps its memory in an LLM wiki (an `index.md` plus one page per topic, maintained through ingest, query and lint) and writes it as a historical record: every claim is dated, and every claim about code cites the commit it was true at.
+
+- [`e6f24ab`](https://github.com/mattpocock/skills/commit/e6f24abca280a8c9ce46a8facd471473eadbc788) Thanks [@mattpocock](https://github.com/mattpocock)! - `code-review` now searches the repo for standards files and always hands `CODING_STANDARDS.md` / `CONTRIBUTING.md` to the Standards sub-agent ([#1065](https://github.com/mattpocock/skills/issues/1065)), runs both sub-agents in the foreground and uses their returned reports ([#1073](https://github.com/mattpocock/skills/issues/1073)), and resolves the issue tracker through the provided tracker doc instead of a hard-coded path ([#937](https://github.com/mattpocock/skills/issues/937)).
+
+- [`4346feb`](https://github.com/mattpocock/skills/commit/4346febc975fcc4a5133c080efa9d2fc5e84f996) Thanks [@mattpocock](https://github.com/mattpocock)! - `diagnosing-bugs` Phase 5 now has the agent `diff` a forced mutation against a pristine copy before trusting the red, so an edit that silently changed nothing can't pass as a failing test ([#955](https://github.com/mattpocock/skills/issues/955)).
+
+- [`01b0761`](https://github.com/mattpocock/skills/commit/01b07613d75e786f2531bef36d40de00161eccdb) Thanks [@mattpocock](https://github.com/mattpocock)! - Fixed the GitHub tracker template's external-PR listing, which failed on `authorAssociation` ([#468](https://github.com/mattpocock/skills/issues/468), thanks @lofi-coding). Re-run `/setup-matt-pocock-skills` to refresh `docs/agents/issue-tracker.md`.
+
+- [`6df319d`](https://github.com/mattpocock/skills/commit/6df319d1717d0ef8a148150d237175afdc171129) Thanks [@mattpocock](https://github.com/mattpocock)! - `grilling` words each question so "yes" accepts the recommended answer, so agreeing never means answering "no" ([#706](https://github.com/mattpocock/skills/issues/706)).
+
+- [`07460ff`](https://github.com/mattpocock/skills/commit/07460fffb0aadbf606329e1957b40e7c58adb5e3) Thanks [@mattpocock](https://github.com/mattpocock)! - `handoff` now names where the OS temp directory is (`$TMPDIR`, else `/tmp`; `%TEMP%` on Windows), so agents stop guessing ([#272](https://github.com/mattpocock/skills/issues/272)).
+
+- [`ee117ec`](https://github.com/mattpocock/skills/commit/ee117ec86670e7a242e77d672c6646ce423229df) Thanks [@mattpocock](https://github.com/mattpocock)! - `implement` now calls the Skill tool for `tdd` and `code-review` instead of bare `/skill` prose, matching [#878](https://github.com/mattpocock/skills/issues/878).
+
+- [`5682d90`](https://github.com/mattpocock/skills/commit/5682d90cb997deec08352e6c508332dd800e1092) Thanks [@mattpocock](https://github.com/mattpocock)! - `implement` fetches a passed ticket reference from the issue tracker and states its title before starting, asking when the reference is ambiguous ([#700](https://github.com/mattpocock/skills/issues/700)).
+
+- [`bde25f9`](https://github.com/mattpocock/skills/commit/bde25f981139fc602de023b74ebeef42fa8cf425) Thanks [@mattpocock](https://github.com/mattpocock)! - `setup-matt-pocock-skills` now creates missing triage labels on GitHub/GitLab ([#616](https://github.com/mattpocock/skills/issues/616)), fixes the GitLab template's `glab` commands ([#635](https://github.com/mattpocock/skills/issues/635)), reads GitHub issues with `--json` so labels and body come through ([#733](https://github.com/mattpocock/skills/issues/733)), and names the "Label in our tracker" column in `triage-labels.md` ([#801](https://github.com/mattpocock/skills/issues/801)). Re-run `/setup-matt-pocock-skills` to refresh `docs/agents/`.
+
+- [`a0c2192`](https://github.com/mattpocock/skills/commit/a0c219261da00426770732367fd91bcb7e57d2c7) Thanks [@mattpocock](https://github.com/mattpocock)! - `tdd` now gives each proposed seam a one-line note on what it catches and what it misses, so choosing between seams is no longer a guess ([#607](https://github.com/mattpocock/skills/issues/607)).
+
+- [`1146d1c`](https://github.com/mattpocock/skills/commit/1146d1c0cd03b7951d39a956d11aa93fed330714) Thanks [@mattpocock](https://github.com/mattpocock)! - `teach` quizzes vary which position holds the correct answer ([#611](https://github.com/mattpocock/skills/issues/611)).
+
+- [`1146d1c`](https://github.com/mattpocock/skills/commit/1146d1c0cd03b7951d39a956d11aa93fed330714) Thanks [@mattpocock](https://github.com/mattpocock)! - `teach` writes its workspace to the directory you ran it in, not the skill folder ([#377](https://github.com/mattpocock/skills/issues/377)).
+
+- [`db451de`](https://github.com/mattpocock/skills/commit/db451de9710dd4e1e3bd69f2171750e06ceb5d45) Thanks [@mattpocock](https://github.com/mattpocock)! - `to-tickets` makes each ticket a sub-issue of its source issue (the GitHub tracker template now gives the command), and omits `## Blocked by` when blockers are native edges. Re-run `/setup-matt-pocock-skills` to refresh `docs/agents/issue-tracker.md`. Thanks @richardwhatever ([#554](https://github.com/mattpocock/skills/issues/554)) and @adamslowe ([#262](https://github.com/mattpocock/skills/issues/262)).
+
+- [`6b711da`](https://github.com/mattpocock/skills/commit/6b711da56623c8df6e5073e9c2ed8dd66c7a14dc) Thanks [@mattpocock](https://github.com/mattpocock)! - `wayfinder` no longer labels maps or tickets `ready-for-agent` ([#518](https://github.com/mattpocock/skills/issues/518)), writes cross-references only with real issue ids ([#507](https://github.com/mattpocock/skills/issues/507)), opens no PR from research branches ([#576](https://github.com/mattpocock/skills/issues/576)), and resolves each ticket as the type its label names ([#625](https://github.com/mattpocock/skills/issues/625)). Thanks @jcwayne, @baob, @rynz and @sponge-b0b.
+
+- [`88aa77d`](https://github.com/mattpocock/skills/commit/88aa77d10d95ffa3e7308fd1c138123fd0d40318) Thanks [@mattpocock](https://github.com/mattpocock)! - `wizard` template fixes: `_existing` decodes a double-quoted `.env` value, so Enter-keeps-current no longer stores the quotes ([#1220](https://github.com/mattpocock/skills/issues/1220)); stages run inside `run_wizard`, so editing the script mid-run can't kill it ([#1142](https://github.com/mattpocock/skills/issues/1142)); `_clear` falls back to ANSI when `tput clear` fails ([#1081](https://github.com/mattpocock/skills/issues/1081)); `write_env` sets the shell variable too ([#1041](https://github.com/mattpocock/skills/issues/1041)); drop the unused `RED` ([#1003](https://github.com/mattpocock/skills/issues/1003)).
+
+- [`8391458`](https://github.com/mattpocock/skills/commit/8391458d79d601a4e3058aa896e9b63a7cfc167c) Thanks [@mattpocock](https://github.com/mattpocock)! - `wizard` template fixes: `ask` uses Readline so arrow keys move the cursor ([#741](https://github.com/mattpocock/skills/issues/741)); `write_env` single-quotes values so spaces, `#`, `$` and quotes survive `source` and dotenv ([#770](https://github.com/mattpocock/skills/issues/770)); `open_url` prints the open-it-yourself warning when no browser opener exists ([#774](https://github.com/mattpocock/skills/issues/774)); `write_env` writes through a symlinked `.env` and keeps an existing file's mode ([#811](https://github.com/mattpocock/skills/issues/811)); `ask` and `ask_secret` fail at EOF instead of looping ([#852](https://github.com/mattpocock/skills/issues/852)).
+
 ## 1.3.1
 
 ### Patch Changes
