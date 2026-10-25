@@ -7,7 +7,13 @@ Interview the user relentlessly until you reach a shared understanding. Map this
 
 Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
 
-Format a round like so:
+Ask each round through your harness's structured question tool (`AskUserQuestion` in Claude Code, `AskQuestion` in Cursor, `request_user_input` in Codex), so the user picks answers in the TUI instead of typing them:
+
+- One question per decision, short header and prompt. Put any context a question needs (trade-offs, what each option implies) in a brief chat message before the call, not inside the prompt.
+- Your recommended answer is the first option, its label ending in "(Recommended)". Offer the real alternatives as the other options; the tool's free-text "Other" covers anything you didn't list.
+- If the tool caps questions per call, split the round across back-to-back calls. It is still one round: collect every answer before recomputing the frontier.
+
+Only when no such tool is available, format the round as markdown:
 
 ```
 ❓ **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
@@ -21,7 +27,7 @@ Format a round like so:
 ➡️ <your recommended answer>
 ```
 
-Word each question so "yes" accepts your recommended answer.
+Word each markdown question so "yes" accepts your recommended answer.
 
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
 
