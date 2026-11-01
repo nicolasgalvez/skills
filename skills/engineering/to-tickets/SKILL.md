@@ -36,6 +36,13 @@ Break the work into **tracer bullet** tickets.
 
 Give each ticket its **blocking edges**: the other tickets that must complete before it can start. A ticket with no blockers can start immediately.
 
+Give each ticket its **models**: the one that implements it and the one that reviews it, so whoever dispatches the work names them instead of inheriting the session's model. Follow the repo's model-selection guidance (its `AGENTS.md`) where it has one; otherwise use the cheapest tier that can do the work:
+
+- **Cheap:** mechanical work from a complete spec, one or two files.
+- **Standard:** multi-file integration, and the floor for any reviewer.
+- **Most capable:** design or architecture judgment, and the whole-branch review of a large or risky diff.
+- A fix loop that reaches its fourth round moves up one tier.
+
 **Wide refactors are the exception to vertical slicing.** A **wide refactor** is one mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so a single edit breaks thousands of call sites at once and no vertical slice can land green. Don't force it into a tracer bullet; sequence it as **expand–contract**. First expand: add the new form beside the old so nothing breaks. Then migrate the call sites over in batches sized by blast radius (per package, per directory), each batch its own ticket blocked by the expand, keeping CI green batch to batch because the old form still exists. Finally contract: delete the old form once no caller remains, in a ticket blocked by every migrate batch. When even the batches can't stay green alone, keep the sequence but let them share an integration branch that all block a final integrate-and-verify ticket; green is promised only there.
 
 ### 4. Quiz the user
@@ -45,6 +52,7 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Title**: short descriptive name
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
+- **Models**: which implements it and which reviews it
 
 Ask the user:
 
@@ -73,6 +81,8 @@ Do NOT close or modify any parent issue.
 
 **Blocked by:** the numbers/titles of the tickets that gate this one, or "None (can start immediately)".
 
+**Models:** which implements it and which reviews it, and why that tier.
+
 **Status:** ready-for-agent
 
 - [ ] Acceptance criterion 1
@@ -94,6 +104,10 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 
 - [ ] Criterion 1
 - [ ] Criterion 2
+
+## Models
+
+Which model implements it and which reviews it, and why that tier.
 
 ## Blocked by
 
